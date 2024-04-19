@@ -12,17 +12,17 @@ module.exports = class AcessoDados {
 
             // percorre os parametros
             if (parametros && parametros != undefined) {
-                
+
                 let p = parametros;
 
                 for (let key in p) {
-                    
+
                     if (p.hasOwnProperty(key)) {
-                        
+
                         let campo = key;
                         let valor = p[key];
 
-                        SqlQueryUp = SqlQueryUp.replace('@' + campo, `'${valor}`)
+                        SqlQueryUp = SqlQueryUp.replace('@' + campo, `'${valor}'`);
 
                     }
 
@@ -41,7 +41,7 @@ module.exports = class AcessoDados {
                     }
                     retorno = results;
                     resolve();
-                })
+                });
 
             });
 

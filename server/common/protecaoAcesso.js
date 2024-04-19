@@ -1,11 +1,11 @@
 var jwt = require('jsonwebtoken');
 var SchemaObject = require('node-schema-object');
 
-var UsuarioAcessoToken = new SchemaObject({ tokenAcesso: String},
+var UsuarioAcessoToken = new SchemaObject({ tokenAcesso: String }, 
     {
         methods: {
 
-            geraTokenAcesso(dados) {
+            gerarTokenAcesso(dados) {
 
                 try {
                     return jwt.sign({ 'Email': dados.email, 'IdEmpresa': dados.idempresa, 'Nome': dados.nome }, 'Token', { expiresIn: 86400000 })
@@ -21,7 +21,7 @@ var UsuarioAcessoToken = new SchemaObject({ tokenAcesso: String},
                 var headerTokenAcesso = req.headers["authorization"];
 
                 if (typeof headerTokenAcesso != 'undefined') {
-                    
+
                     try {
                         jwt.verify(headerTokenAcesso, 'Token');
                         next();
@@ -39,24 +39,24 @@ var UsuarioAcessoToken = new SchemaObject({ tokenAcesso: String},
             retornaCodigoTokenAcesso(valor, req) {
 
                 var headerTokenAcesso = req.headers["authorization"];
-                var decoded = jwt.decode(headerTokenAcesso, { complete: true});
+                var decoded = jwt.decode(headerTokenAcesso, { complete: true });
 
                 if (valor === "IdEmpresa") {
-                    return decoded.payload.IdEmpresa;   
+                    return decoded.payload.IdEmpresa;
                 }
 
                 if (valor === "Email") {
-                    return decoded.payload.Email    ;   
+                    return decoded.payload.Email;
                 }
 
                 if (valor === "Nome") {
-                    return decoded.payload.Nome;   
+                    return decoded.payload.Nome;
                 }
 
             }
 
         }
-    }
+    }    
 );
 
 module.exports = UsuarioAcessoToken;
