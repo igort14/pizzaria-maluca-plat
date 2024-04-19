@@ -8,7 +8,8 @@ var config = {
             port: 3306,
             user: 'root',
             password: 'Bola1234@',
-            database: 'pizzaria'
+            database: 'pizzaria',
+            timezone: 'utc'
         }
     }
 }
